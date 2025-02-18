@@ -1,0 +1,14 @@
+// Rebuild and run with file input:
+clear && make clean && make && ./lets_vote  test_input.txt
+
+// Run TA tests
+clear && make clean && make && bash cp4_test_helper.sh ./lets_vote 1
+clear && make clean && make && bash cp4_test_helper.sh ./lets_vote 2
+clear && make clean && make && bash cp4_test_helper.sh ./lets_vote 3
+
+// Run Max Heap tests
+clear && make clean && make ./MaxHeapTest
+
+// Run BST tests
+clear && make clean && make && ./bstTest
+

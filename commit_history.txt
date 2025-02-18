@@ -1,0 +1,55 @@
+dbda360 - alexeskenazi, 2 months ago : Updating the readme with some Q&A from the Demo session
+a6d3e9b - alexeskenazi, 2 months ago : Update for notes
+4b0f22b - alexeskenazi, 3 months ago : Adding makefile item to create the tar file based on teachers makefile from CP2
+84da5ee - alexeskenazi, 3 months ago : Moving ownership of the Voter memory to the bst
+05a450f - vishilpatel1, 3 months ago : Making sure nodes in the bst are deleted at the end
+8943e46 - alexeskenazi, 3 months ago : Cast list size to int to avoid warnings on lab computer
+d941606 - alexeskenazi, 3 months ago : Fixing broken test due to missing age in "voted" command
+8734d6a - vishilpatel1, 3 months ago : Adding my ids
+c1f6011 - alexeskenazi, 3 months ago : Minor cleanup
+42ff4e5 - vishilpatel1, 3 months ago : Switch directed vector from using list to using vector
+fdc13b0 - alexeskenazi, 3 months ago : changes to make it compile in the lab
+ccbb1a2 - alexeskenazi, 3 months ago : ignore new binary test file
+203a66d - vishilpatel1, 3 months ago : First pass as BST implementation
+49afd23 - alexeskenazi, 3 months ago : Updating test with different support numbers
+53c7ef9 - alexeskenazi, 3 months ago : Fixing voted not skipped in show-impact
+1fae3ca - alexeskenazi, 3 months ago : Remove binary
+beb31b3 - alexeskenazi, 3 months ago : Fixing debugging
+938e40f - alexeskenazi, 3 months ago : Fixing tests and crash on empty list with chauffeur
+573bf5b - alexeskenazi, 3 months ago : Trying to handle multiple expected output lines
+b32f995 - vishilpatel1, 3 months ago : Missed file...
+804cf37 - vishilpatel1, 3 months ago : Fixing age vector bug
+63b29e7 - vishilpatel1, 3 months ago : added "clear" command to restart test like the TA examples
+6205b06 - alexeskenazi, 3 months ago : minor changes
+f5ccdb5 - alexeskenazi, 3 months ago : Removing .o files
+04d68b8 - vishilpatel1, 3 months ago : More work in progress
+6e11f21 - vishilpatel1, 3 months ago : Wip
+52604d3 - alexeskenazi, 3 months ago : MaxHeap cleanup
+87ae62d - alexeskenazi, 3 months ago : add ability to update the heap when the voter impact changes
+00319eb - alexeskenazi, 3 months ago : wip, switch to pointers instead of copies
+af094d7 - alexeskenazi, 3 months ago : adding empty BST files
+3fa362c - alexeskenazi, 3 months ago : Passing pointers to AgeVector
+043405c - alexeskenazi, 3 months ago : Moving utility to a separate file
+fb6a1dc - alexeskenazi, 3 months ago : First pass at Age Vector of lists
+337e1b1 - alexeskenazi, 3 months ago : switching fro vector to list
+a9aeaed - alexeskenazi, 3 months ago : Some maxheap cleaup
+e4e67d5 - alexeskenazi, 3 months ago : Started implementing Max Heap
+37c3c57 - alexeskenazi, 3 months ago : Out put comments too to know which test failed
+6e8a83a - alexeskenazi, 3 months ago : More tests
+d5e5309 - alexeskenazi, 3 months ago : test already voted for reduce likelyhood
+11b4965 - alexeskenazi, 3 months ago : WIP
+0dbf18b - alexeskenazi, 3 months ago : adding more tests and comments
+93c56df - alexeskenazi, 3 months ago : Handling input and expected output to test
+9dc8147 - alexeskenazi, 3 months ago : Implemented chauffeur
+e5fbcb9 - alexeskenazi, 3 months ago : implemented reduce-likelihood
+5823cdd - alexeskenazi, 3 months ago : adding impact calculation
+6a7cb81 - alexeskenazi, 3 months ago : Cleanup
+0ad7acc - alexeskenazi, 3 months ago : Added support
+16c193b - alexeskenazi, 3 months ago : Added voted
+af60ac6 - alexeskenazi, 3 months ago : Adding likelyhood to Voter, improving output, etc.
+45f3b7a - alexeskenazi, 3 months ago : Adding modified Voter class from CP3
+8f4bda1 - alexeskenazi, 3 months ago : Create .gitignore
+67f1324 - alexeskenazi, 3 months ago : Deleting binaries
+7a3d5de - alexeskenazi, 3 months ago : Starting input parsing
+c067599 - alexeskenazi, 3 months ago : Updated Readme.
+80dea97 - github-classroom[bot], 3 months ago : Initial commit

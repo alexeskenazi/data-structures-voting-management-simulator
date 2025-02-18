@@ -1,0 +1,210 @@
+
+################
+# Teacher test: Test-case 1 : Add voter, call voted and support on the added voter
+>> voter Renolds Ryan 45
+out: New voter Ryan Renolds, age 45, added
+>> voter Renolds Ryan 45
+out: Ryan Renolds, age 45, already exists
+>> voter Bird Earl 87
+out: New voter Earl Bird, age 87, added
+>> voted Bird Earl
+out: Voter Earl Bird, age 87, voted
+>> support Renolds Ryan 25
+out: Support from Ryan Renolds increased by 25 strength points
+>> clear
+out: cleared
+################
+
+
+###############
+# Teacher test: Test-case 2 : voter, voted, and support
+>> voter Lai Tulsi 16
+out: Voter age should be between 18 and 118
+>> voter Renolds Ryan 45
+out: New voter Ryan Renolds, age 45, added
+>> voter Bird Earl 87
+out: New voter Earl Bird, age 87, added
+>> voted Bird Earl 87
+out: Voter Earl Bird, age 87, voted
+>> voted Bird Earl 87
+out: Earl Bird already voted
+>> support Renolds Ryan 25
+out: Support from Ryan Renolds increased by 25 strength points
+>> clear
+out: cleared
+#################
+
+
+################
+# Teacher test: Test-case 3 : support, reduce-likelihood, show-impact, chauffeur
+>> voter Brown Bob 20
+out: New voter Bob Brown, age 20, added
+>> voter Adams Alice 45
+out: New voter Alice Adams, age 45, added
+>> voter Clark Charlie 44
+out: New voter Charlie Clark, age 44, added
+>> support Brown Bob 20
+out: Support from Bob Brown increased by 20 strength points
+>> support Adams Alice 20
+out: Support from Alice Adams increased by 20 strength points
+>> reduce-likelihood Brown Bob 10
+out: Voting likelihood of Bob Brown decreased by 10%.
+>> chauffeur
+out: Driving Bob Brown (20): strength of support: 95, likelihood: 67.50, impact: 1.41
+>> chauffeur
+out: Driving Alice Adams (45): strength of support: 95, likelihood: 75.00, impact: 1.27
+>> chauffeur
+out: Driving Charlie Clark (44): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+# expect no items to show because all voted already
+>> show-impact
+out: Ignore
+>> clear
+out: cleared
+#################
+
+#################
+# Test some of the rules
+
+# Test voter under age
+>> voter West Kayne 17
+out: Voter age should be between 18 and 118
+
+# Test voter over age
+>> voter West Kayne 119
+out: Voter age should be between 18 and 118
+
+# Test add new Young minimum voting age valid voter
+>> voter West Kayne 18
+out: New voter Kayne West, age 18, added
+
+# Test add new OLD maximum age valid voter
+>> voter East Caine 118
+out: New voter Caine East, age 118, added
+
+>> voter L118 F118 118
+out: New voter F118 L118, age 118, added
+
+>> voter James Earl 23
+out: New voter Earl James, age 23, added
+
+# Test add same existing voter, age does not matter
+>> voter James Earl 99
+out: Earl James, age 99, already exists
+
+################
+# Test: commands fail after voter voted
+>> voter L018 F018 18
+out: New voter F018 L018, age 18, added
+>> voted L018 F018 18
+out: Voter F018 L018, age 18, voted
+>> voted L018 F018 18
+out: F018 L018 already voted
+>> support L018 F018 1000
+out: F018 L018 already voted
+>> reduce-likelihood  L018 F018 100 
+out: F018 L018 already voted
+################
+
+################
+# Test: commands fail after chauffeur 
+>> voter L019 F019 19
+out: New voter F019 L019, age 19, added
+>> support L019 F019 10000
+out: Support from F019 L019 increased by 10000 strength points
+>> reduce-likelihood  L019 F019 0 
+out: Voting likelihood of F019 L019 decreased by 0%.
+>> chauffeur
+out: Driving F019 L019 (19): strength of support: 10075, likelihood: 75.00, impact: 134.33
+>> voted L019 F019 19
+out: F019 L019 already voted
+>> reduce-likelihood  L018 F018 100
+out: F018 L018 already voted
+>> support L018 F018 1000
+out: F018 L018 already voted
+################
+
+
+>> voter James Lebron 119
+out: Voter age should be between 18 and 118
+
+>> voter Lewis Mike 54
+out: New voter Mike Lewis, age 54, added
+
+>> voter Bird Earl 87
+out: New voter Earl Bird, age 87, added
+
+>> support Bird Earl 32
+out: Support from Earl Bird increased by 32 strength points
+
+>> voted Bird Earl 30
+out: Voter Earl Bird, age 87, voted
+
+# Check support already voted
+>> support Bird Earl 20
+out: Earl Bird already voted
+
+# Check reduce-likelihood already voted
+>> reduce-likelihood Bird Earl 20
+out: Earl Bird already voted
+
+>> support Lewis Mike 130
+out: Support from Mike Lewis increased by 130 strength points
+
+>> reduce-likelihood Lewis Mike 13
+out: Voting likelihood of Mike Lewis decreased by 13%.
+
+>> show-impact
+out-n: 5
+Kayne West (18): strength of support: 75, likelihood: 75.00, impact: 1.00
+Earl James (23): strength of support: 75, likelihood: 75.00, impact: 1.00
+Mike Lewis (54): strength of support: 205, likelihood: 65.25, impact: 3.14
+Caine East (118): strength of support: 75, likelihood: 75.00, impact: 1.00
+F118 L118 (118): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+# Test that chauffeur marks the voter as voted
+>> chauffeur
+out: Driving Mike Lewis (54): strength of support: 205, likelihood: 65.25, impact: 3.14
+
+# Test that voters who voted are not included
+>> show-impact
+out-n: 4
+Kayne West (18): strength of support: 75, likelihood: 75.00, impact: 1.00
+Earl James (23): strength of support: 75, likelihood: 75.00, impact: 1.00
+Caine East (118): strength of support: 75, likelihood: 75.00, impact: 1.00
+F118 L118 (118): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+>> chauffeur
+out: Driving Earl Bird (87): strength of support: 107, likelihood: 75.00, impact: 1.43
+
+>> chauffeur
+out: Driving F118 L118 (118): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+>> chauffeur
+out: Driving F018 L018 (18): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+>> chauffeur
+out: Driving Earl James (23): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+>> chauffeur
+out: Driving Kayne West (18): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+>> chauffeur
+out: Driving Caine East (118): strength of support: 75, likelihood: 75.00, impact: 1.00
+
+# test when there are no more voters
+>> chauffeur
+out: No voters found in list
+
+>> chauffeur
+out: No voters found in list
+
+>> support Lewis Mike 1000
+out: Mike Lewis already voted
+
+# Check show-impact output
+>> show-impact
+out: Ignore
+
+>> quit
+out: Exiting Program
