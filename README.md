@@ -1,85 +1,204 @@
-# cs310-fall2024-cp4-group-assignment
+# Voting Management Simulator
 
-Full Names: Alex Eskenazi, Vishil Patel
+## Overview
 
-GitHub IDs: alexeskenazi, vishilpatel1
+The Voting Management Simulator is a project designed to simulate and manage voting processes using various data structures. The project includes implementations of Binary Search Trees (BST), Max Heaps, and Age Vectors to efficiently manage and query voter information.
 
-Binghamton CS userids: aeskena1, vpatel57
+## Features
 
-Discord names: palexxx, vishilpatel
-
-Please type or copy the CS 310 honesty statement here:
-I have worked on this project individually, and have not given or received too much help. In particular, I have not gained access to any other students' repositories, files, or code, nor have I given any other students access to mine. I have not used generative AI, including but not limited to chatGPT, unless explicitly authorized for this assignment. I understand that my code will be run through a very effective similarity checker, and that academic honesty violations are taken seriously.
-
-With respect to the honesty statement, if you have any doubts whatsoever about whether you have completed the assignment appropriately, please describe briefly here:
-
-CS310 - Demo Notes
-
-How do you maintain links between your data structures?
-Memory Management:
-Voter objects are owned by the BST which deletes them in its destructor.
-The MaxHeap and the Age Vector hold pointers to the Voter objects.
-
-How are memory leaks prevented? Who releases the memory?
-The BST is made up of BSTNodes.
-Each BSTNode has a pointer to the Voter and owns it. Meaning that the BSTNode destructure deletes the Voters when it is deleted  (in the BSTNode  destructor)
-The BSTNode is deleted when the BST is deleted (in the BST destructor).
-The other two data structures, the MaxHeap and the Age Array do not delete the Voter objects.
-
-How do you update your bst/voter after percolate up, extract, etc.?
-Since the Voter is in the BST, we just search for it and do changes on the object.
-If the Impact changes because of changes to support/strength or likelihood then we call an update function on Impact Max Heap, find the voter in the heap and percolate it up.
-We can percolate up because we know that the Impact only increases.
-If the Voter voted, we just mark it as voted and exclude it going forward.
-
-Why does the Impact only increase and does not go down?
-The support command only increases the strength.
-The reduce-likelihood only reduces the likelihood (likelihood = likelihood * (100-X)/100
-impact = strength / likelihood, strength goes up and likelihood goes down so impact only can go up.
-
-How is the BST sorted? What is your BST organized by?
-The BST is sorted by keys of the form first name + ”  ”+ last name.
-
-What is the complexity of finding a Voter?
-What is the time complexity of finding a user in the Binary search Tree?
-Voters are looked up by their key (based on their names)
-Since it is a Binary Search Tree, on average the lookup is O(Log N). 
-This is on average if we assume the tree is balanced.
-
-Are you removing the already voted from the system or just flagging?
-Not removed, just marked (flagged) as already voted.
-Why? To be able to stop a voter who already voted from registering again. 
-
-What did you sort by for each?
-BST is by the name based key. Used for the rest (voter, voted, support, likelihood)
-MaxHeap is by Impact. Use for chauffeur.
-Age Array is by Age. Used for show-impact.
-
-Age Array/Vector Implementation:
-Used for show-impact to list all the voters sorted by age.
-Implemented as a Vector of Voter Vectors of pointers to Voters  (vector< vector<Voter*> > ages; )
-The outer vector uses the age of the voter to find the inner Voter vector. This is done in constant time.  For example, to find all the inner vectors for age 21 we just look up ages[21].
-To print all the Voter objects by age we simply loop through the ages vector and for each one we loop through the Voters. We skip any Voter objects marked as voted.
-Printing the list is O(N) because we print sequentially and only visit each object once.
-Adding a Voter is O(1) 
-Why did you guys use a Vector instead of Arrays? To avoid having to deal with increasing capacity and having to allocate memory and copy the array.
+- **Binary Search Tree (BST)**: Efficiently stores and retrieves voter information based on unique keys.
+- **Max Heap**: Manages voters based on their impact scores.
+- **Age Vector**: Organizes voters by age groups for quick access and analysis.
 
 
-Efficiency Requirements
-support and reduce-likelihood work in O(log N) using the BST to search for Voters.
-voted and voter must work in O(log N) time. They also use the BST…
-chauffeur must work in O(log N) time. Retrieving the Voter with highest Impact from the MaxHeap is O(1), but extracting it requires percolating up which is O(log N).
-show-impact should work in O(N) time. Because it shows the voters by age, it uses the Age Array (Vector) which is sorted by Age.
-One visit per voter
+## Efficiency Requirements
 
-Testing
-To test while writing the code we used a test file that provided the user inputs and expected outputs.
-This helped make sure we test Edge Cases and that we do not introduce bugs as we change things.
+| Operation           | Time Complexity |
+| ------------------- | --------------- |
+| `support`           | O(log N)        |
+| `reduce-likelihood` | O(log N)        |
+| `chauffeur`         | O(log N)        |
+| `voted` & `voter`   | O(log N)        |
+| `show-impact`       | O(N)            |
+
+## Setup Instructions
+
+1. **How do I clone the repository?**
+   ```sh
+   git clone https://github.com/yourusername/data-structures-voting-management-simulator.git
+   cd data-structures-voting-management-simulator
+   ```
+
+2. **How do I build the project?**
+   ```sh
+   make
+   ```
+
+3. **How do I run the tests?**
+   ```sh
+   ./bstTest
+   ./MaxHeapTest
+   ```
+
+## Usage
+
+- **How do I run the simulator?**
+  ```sh
+  ./lets_vote [input_file]
+  ```
+  If no input file is provided, the simulator will accept input from the console.
+
+- **What is the expected input format?**
+  The input file should contain commands to add voters, query voter information, and manage the voting process. Example:
+  ```
+  add_voter John Doe 30
+  add_voter Jane Smith 25
+  show_impact
+  ```
+
+## Project Structure
+
+- **What are the key files in this project?**
+  - `bst.h / bst.cpp`: Implementation of the Binary Search Tree.
+  - `MaxHeap.h / MaxHeap.cpp`: Implementation of the Max Heap.
+  - `AgeVector.h / AgeVector.cpp`: Implementation of the Age Vector.
+  - `Voter.h / Voter.cpp`: Definition and implementation of the Voter class.
+  - `helper.h / helper.cpp`: Utility functions used across the project.
+  - `bstTest.cpp`: Unit tests for the BST implementation.
+  - `MaxHeapTest.cpp`: Unit tests for the Max Heap implementation.
+
+## Commands
+
+### **1. Add a Voter**
+```plaintext
+voter <last-name> <first-name> <age>
+```
+- Adds a new voter to the system
+- Name must contain only letters
+- Age must be between 18 and 118
+- Duplicate voters are not allowed
+
 Example:
-# Teacher test: Test-case 2 : voter, voted, and support
+```plaintext
+: voter Lewis Mike 54
+New voter Mike Lewis, age 54, added.
+```
+
+### **2. Mark a Voter as Voted**
+```plaintext
+voted <last-name> <first-name> <age>
+```
+- Removes the voter from limo ride consideration
+
+Example:
+```plaintext
+: voted Bird Earl 87
+Voter Earl Bird, age 87, voted.
+```
+
+### **3. Increase Voter Support Strength**
+```plaintext
+support <last-name> <first-name> <strength>
+```
+- Increases a voter’s support strength (initially 75)
+- Strength can only increase
+
+Example:
+```plaintext
+: support Lewis Mike 20
+Support from Mike Lewis increased by 20 strength points.
+```
+
+### **4. Reduce Voter Likelihood**
+```plaintext
+reduce-likelihood <last-name> <first-name> <reduction>
+```
+- Reduces the likelihood (initially 75%) of a voter reaching the polls
+- Formula: `likelihood = likelihood * (100 - reduction) / 100`
+
+Example:
+```plaintext
+: reduce-likelihood Lewis Mike 10
+Voting likelihood of Mike Lewis decreased by 10%.
+```
+
+### **5. Select a Voter for Transport**
+```plaintext
+chauffeur
+```
+- Picks the voter with the highest impact (`impact = strength / likelihood`)
+- Removes them from future updates
+
+Example:
+```plaintext
+: chauffeur
+Driving Mike Lewis (54): strength of support: 95, likelihood: 67.5, impact: 1.41
+```
+
+### **6. Display Voter Impact List**
+```plaintext
+show-impact
+```
+- Displays all voters sorted by age with their support strength, likelihood, and impact
+
+Example:
+```plaintext
+: show-impact
+Alice Flanders (18): strength: 150, likelihood: 50, impact: 3.00
+Mike Lewis (54): strength: 95, likelihood: 67.5, impact: 1.41
+Jimmy Carter (100): strength: 1000, likelihood: 10, impact: 100.0
+```
+
+
+## FAQ
+
+### **How do you maintain links between your data structures?**
+The BST owns Voter objects and deletes them in its destructor. The MaxHeap and Age Vector hold pointers to these objects.
+
+### **How are memory leaks prevented? Who releases the memory?**
+Each BSTNode has a pointer to a Voter and owns it, meaning the BSTNode destructor deletes the Voter objects. The BSTNode is deleted when the BST is deleted.
+
+### **What data structures are sorted by what criteria?**
+- **BST**: Sorted by voter name, used for general operations.
+- **MaxHeap**: Sorted by **Impact**, used for `chauffeur`.
+- **Age Vector**: Sorted by **Age**, used for `show-impact`.
+
+## Testing
+
+### **Example test case:**
+```
+# Test: voter, voted, and support
 >> voter Lai Tulsi 16
 out: Voter age should be between 18 and 118
-Lines that start with “#” are skipped so they are considered comments.
-Lines that start with “>>” are use input
-Lines that start with “out:” are expected outputs.
+```
+- Lines starting with `#` are comments.
+- Lines starting with `>>` are user inputs.
+- Lines starting with `out:` are expected outputs.
+
+## Contribution Guidelines
+
+1. **Fork the repository**.
+2. **Create a new branch**:
+   ```sh
+   git checkout -b feature-name
+   ```
+3. **Commit your changes**:
+   ```sh
+   git commit -m "Description of your changes"
+   ```
+4. **Push to the branch**:
+   ```sh
+   git push origin feature-name
+   ```
+5. **Create a Pull Request**.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Authors
+- **Alex Eskenazi** - Initial work
+- **Vishil Patel** - Contributions
+
+## Acknowledgments
+- Special thanks to the teaching assistants and professors for their guidance and support.
 
