@@ -21,32 +21,6 @@ The Voting Management Simulator is a project designed to simulate and manage vot
 | `voted` & `voter`   | O(log N)        |
 | `show-impact`       | O(N)            |
 
-## Setup Instructions
-
-1. **How do I clone the repository?**
-   ```sh
-   git clone https://github.com/yourusername/data-structures-voting-management-simulator.git
-   cd data-structures-voting-management-simulator
-   ```
-
-2. **How do I build the project?**
-   ```sh
-   make
-   ```
-
-3. **How do I run the tests?**
-   ```sh
-   ./bstTest
-   ./MaxHeapTest
-   ```
-
-## Usage
-
-- **How do I run the simulator?**
-  ```sh
-  ./lets_vote [input_file]
-  ```
-  If no input file is provided, the simulator will accept input from the console.
 
 - **What is the expected input format?**
   The input file should contain commands to add voters, query voter information, and manage the voting process. Example:
@@ -80,8 +54,8 @@ voter <last-name> <first-name> <age>
 
 Example:
 ```plaintext
-: voter Lewis Mike 54
-New voter Mike Lewis, age 54, added.
+: voter Myers Michael 54
+New voter Michael Myers, age 54, added.
 ```
 
 ### **2. Mark a Voter as Voted**
@@ -105,8 +79,8 @@ support <last-name> <first-name> <strength>
 
 Example:
 ```plaintext
-: support Lewis Mike 20
-Support from Mike Lewis increased by 20 strength points.
+: support Myers Michael 20
+Support from Michael Myers increased by 20 strength points.
 ```
 
 ### **4. Reduce Voter Likelihood**
@@ -118,8 +92,8 @@ reduce-likelihood <last-name> <first-name> <reduction>
 
 Example:
 ```plaintext
-: reduce-likelihood Lewis Mike 10
-Voting likelihood of Mike Lewis decreased by 10%.
+: reduce-likelihood Myers Michael 10
+Voting likelihood of Michael Myers decreased by 10%.
 ```
 
 ### **5. Select a Voter for Transport**
@@ -132,7 +106,7 @@ chauffeur
 Example:
 ```plaintext
 : chauffeur
-Driving Mike Lewis (54): strength of support: 95, likelihood: 67.5, impact: 1.41
+Driving Michael Myers (54): strength of support: 95, likelihood: 67.5, impact: 1.41
 ```
 
 ### **6. Display Voter Impact List**
@@ -145,7 +119,7 @@ Example:
 ```plaintext
 : show-impact
 Alice Flanders (18): strength: 150, likelihood: 50, impact: 3.00
-Mike Lewis (54): strength: 95, likelihood: 67.5, impact: 1.41
+Michael Myers (54): strength: 95, likelihood: 67.5, impact: 1.41
 Jimmy Carter (100): strength: 1000, likelihood: 10, impact: 100.0
 ```
 
@@ -175,22 +149,26 @@ out: Voter age should be between 18 and 118
 - Lines starting with `>>` are user inputs.
 - Lines starting with `out:` are expected outputs.
 
-## Contribution Guidelines
+## Setup Instructions
 
-1. **Fork the repository**.
-2. **Create a new branch**:
+1. **How do I build the project?**
    ```sh
-   git checkout -b feature-name
+   make
    ```
-3. **Commit your changes**:
+
+2. **How do I run the tests?**
    ```sh
-   git commit -m "Description of your changes"
+   ./bstTest
+   ./MaxHeapTest
    ```
-4. **Push to the branch**:
-   ```sh
-   git push origin feature-name
-   ```
-5. **Create a Pull Request**.
+
+## Usage
+
+- **How do I run the simulator?**
+  ```sh
+  ./lets_vote [input_file]
+  ```
+  If no input file is provided, the simulator will accept input from the console.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
